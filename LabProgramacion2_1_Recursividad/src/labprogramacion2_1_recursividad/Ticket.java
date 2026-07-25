@@ -12,6 +12,35 @@ public class Ticket {
         this.nombre = nombre;
         this.precioTicket = precioTicket;
         this.esPalindromo = esPalindromo;
+        this.montoPago = montoPago;
     
+        if (this.esPalindromo) {
+            this.montoPago = precioTicket * 0.80;
+        } else {
+            this.montoPago = precioTicket;
+        }
     }
+    
+    public String getName(){
+        
+        return nombre;
+    }
+    
+    public double getFinalAmount(){
+        return montoPago;
+    }
+    
+    public double getOriginalAmount(){
+        return precioTicket;
+    }
+    
+    public boolean isPalindrome() {
+        return esPalindromo;
+    }
+    
+    public String imprimirInformacion(){
+        String agregarDescuento = esPalindromo? "Si, usted recibe un 20%":"No";
+        return "Pasajero: " + nombre + " | Monto Inicial: " + precioTicket + " | Monto Final: " + montoPago + " | ¿Es palíndromo?: " + agregarDescuento;
+    }
+    
 }
