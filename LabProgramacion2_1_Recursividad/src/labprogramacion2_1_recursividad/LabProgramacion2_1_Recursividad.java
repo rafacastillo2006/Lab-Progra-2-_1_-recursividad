@@ -15,8 +15,9 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class LabProgramacion2_1_Recursividad implements ActionListener {
-
-//    PalindromoAir air= new PalindromoAir();
+    public String nom_p;
+    public int indice;
+    PalindromoAir air= new PalindromoAir();
     JFrame frame = new JFrame();
     JPanel panel_boton = new JPanel();
     JButton[] botones = new JButton[30];
@@ -79,6 +80,7 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
 
         nombre.setText("Nombre de Pasajero");
         enter.setText("Enter");
+        enter.addActionListener(this);
 
         panel_superior.add(nombre);
         panel_superior.add(campo_nombre);
@@ -99,7 +101,8 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         for (int i = 0; i < botones.length; i++) {
             if (e.getSource() == botones[i]) {
 
-                consola.append("Print prueba asiento : " + i + "\n");
+                consola.append("Asiento : " + (i+1) + "\n");
+                indice=i;
 
                 break;
 
@@ -108,8 +111,10 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         }
 
         if (e.getSource()==enter){
-            String nombre;
-            nombre= campo_nombre.getText();
+            
+            nom_p = campo_nombre.getText();
+            consola.append("NOMBRE:" + nom_p+ "\n");
+            
 
         }
 
@@ -134,6 +139,9 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         }
 
         if (e.getSource() == s_passenger) {
+            int Buscar;
+            Buscar = air.searchPassenger(nom_p,indice);
+            consola.append= air.asientos[Buscar]
 
         }
 
