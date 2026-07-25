@@ -2,7 +2,7 @@ package labprogramacion2_1_recursividad;
 
 public class PalindromoAir {
 
-    private Ticket[] asientos;
+    public Ticket[] asientos;
     private static final double Precio_Base = 100;
     
     public PalindromoAir(){

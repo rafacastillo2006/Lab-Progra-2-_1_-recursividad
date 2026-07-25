@@ -101,8 +101,9 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         for (int i = 0; i < botones.length; i++) {
             if (e.getSource() == botones[i]) {
 
-                consola.append("Asiento : " + (i+1) + "\n");
+                consola.append("\n Asiento : " + (i+1) + "\n");
                 indice=i;
+                air.f
 
                 break;
 
@@ -113,13 +114,16 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         if (e.getSource()==enter){
             
             nom_p = campo_nombre.getText();
-            consola.append("NOMBRE:" + nom_p+ "\n");
+            consola.append("\nNOMBRE:" + nom_p+ "\n");
             
 
         }
 
         if (e.getSource() == s_ticket) {
-            System.out.println("prueba vender ticket");
+            String mensaje;
+            mensaje=air.sellTicket(nom_p);
+            consola.append(mensaje);
+            
         }
 
         if (e.getSource() == c_ticket) {
@@ -141,7 +145,10 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         if (e.getSource() == s_passenger) {
             int Buscar;
             Buscar = air.searchPassenger(nom_p,indice);
-            consola.append= air.asientos[Buscar]
+            consola.append("PASAJERO: "+air.asientos[Buscar].getName());
+            
+            String indx =String.valueOf(Buscar + 1);
+            consola.append("En el asiento: "+ indx);
 
         }
 
