@@ -1,6 +1,4 @@
-
 package labprogramacion2_1_recursividad;
-
 
 import java.awt.Color;
 import static java.awt.Color.BLACK;
@@ -10,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 /**
  *
@@ -21,7 +20,16 @@ public class MiVentana implements ActionListener {
     JPanel panel_boton = new JPanel();
     JButton[] botones = new JButton[30];
 
+    JPanel panel_inferior = new JPanel();
+    JButton s_ticket = new JButton();
+    JButton c_ticket = new JButton();
+    JButton dipatch = new JButton();
+    JButton p_passenger = new JButton();
+    JButton v_income = new JButton();
+    JButton s_passenger = new JButton();
+
     public MiVentana() {
+
         frame.setTitle("MainApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -32,17 +40,30 @@ public class MiVentana implements ActionListener {
         panel_boton.setLayout(new GridLayout(5, 6));
         panel_boton.setBackground(BLACK);
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
-                botones[i] = new JButton();
-                panel_boton.add(botones[i]);
-                botones[i].addActionListener(this);
+        for (int i = 0; i < 30; i++) {
 
-            }
+            botones[i] = new JButton();
+            panel_boton.add(botones[i]);
+            botones[i].addActionListener(this);
 
         }
 
+        
+        s_ticket.setText("Sell Ticket");
+        
+        
+        panel_inferior.setLayout(new GridLayout(1, 6));
+        panel_inferior.add(s_ticket);
+        panel_inferior.add(c_ticket);
+        panel_inferior.add(dipatch);
+        panel_inferior.add(p_passenger);
+        panel_inferior.add(v_income);
+        panel_inferior.add(s_passenger);
+
         frame.add(panel_boton);
+        frame.add(panel_inferior);
+        frame.add(panel_boton, BorderLayout.CENTER);
+        frame.add(panel_inferior, BorderLayout.SOUTH);
 
         frame.setVisible(true);
     }
