@@ -77,6 +77,25 @@ public class PalindromoAir {
         
         asientos[indice] = null;
     }
+    
+    public double dispatch() {
+        double totaldeIngresos = income(0);
+        reset(0);
+        return totaldeIngresos;
+    }
+    
+    public String sellTicket(String nombre){
+        int asiento = firstAvailable(0);
+        boolean palindromo = esPalindromo(nombre);
+        
+        if(asiento == -1){
+            return "No has asientos disponibles en este momento, vuelva pronto";  
+        }
+        
+        asientos[asiento] = new Ticket(nombre, Precio_Base, palindromo);
+        
+        return "Ticket vendido.\n" + "Asiento: " + (asiento + 1) + "\n Monto pagado: L." + asientos[asiento].getFinalAmount();
+    }
         
         
     }
