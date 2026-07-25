@@ -77,6 +77,12 @@ public class PalindromoAir {
         
         asientos[indice] = null;
     }
+    
+    public double dispatch() {
+        double totaldeIngresos = income(0);
+        reset(0);
+        return totaldeIngresos;
+    }
         
         
     }
