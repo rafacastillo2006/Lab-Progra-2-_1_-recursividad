@@ -18,16 +18,18 @@ public class PalindromoAir {
                     return indice;
         }
         return firstAvailable(indice + 1);
+    }
         
-        public int searchPassenger (String nombre, int indice){
+        public int searchPassenger(String nombre, int indice){
             
            if (indice >= asientos.length){
                return -1;
            }
            
            if (asientos[indice] != null && asientos[indice].getName().equalsIgnoreCase(nombre)){
-             
+             return indice;
            }
+           return searchPassenger(nombre, indice +1);
         }
         
         private boolean esPalindromo(String nombre, int prim, int seg){
@@ -45,35 +47,41 @@ public class PalindromoAir {
         return esPalindromo(nombre, 0, nombre.length() - 1);
     }
         
-        public String printPassengers(int index){
-        if(index == asientos.length){
+        public String printPassengers(int indice){
+        if(indice == asientos.length){
             return "";
         }
-        if(asientos[index] == null){
-            return printPassengers(index + 1);
+        if(asientos[indice] == null){
+            return printPassengers(indice + 1);
         }
         
-        return "Asiento" + (index + 1) + "\n" + asientos[index].imprimirInformacion() + "\n\n" + printPassengers(index + 1);
+        return "Asiento" + (indice + 1) + "\n" + asientos[indice].imprimirInformacion() + "\n\n" + printPassengers(indice + 1);
     }
     
-    public double income(int index){
-        if (index == asientos.length){
+    public double income(int indice){
+        if (indice == asientos.length){
             return 0;
         }
         
-        if(asientos[index] == null){
-            return income(index+1);
+        if(asientos[indice] == null){
+            return income(indice+1);
         }
         
-        return asientos[index].getFinalAmount() + income(index + 1);
+        return asientos[indice].getFinalAmount() + income(indice + 1);
     }
     
-    public void reset(int index){
-        if (index == asientos.length){
+    public void reset(int indice){
+        if (indice == asientos.length){
             return;
         }
         
-        asientos[index] = null;
+        asientos[indice] = null;
+    }
+    
+    public double dispatch() {
+        double totaldeIngresos = income(0);
+        reset(0);
+        return totaldeIngresos;
     }
     
     public String sellTicket(String nombre){
@@ -91,4 +99,3 @@ public class PalindromoAir {
         
         
     }
-}
