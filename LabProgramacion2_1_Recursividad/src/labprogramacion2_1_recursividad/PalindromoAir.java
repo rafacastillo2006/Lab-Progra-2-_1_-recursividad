@@ -92,6 +92,19 @@ public class PalindromoAir {
         
         return "Ticket vendido.\n" + "Asiento: " + (asiento + 1) + "\n Monto pagado: L." + asientos[asiento].getFinalAmount();
     }
+    
+    public boolean cancelTicket(String nombre){
+        
+        int asiento = searchPassenger(nombre, 0);
+        
+        if(asiento == -1){
+            return false;
+        }
+        
+        asientos[asiento] = null;
+        
+        return true;
+    }
         
         public double dispatch() {
         double totaldeIngresos = income(0);
