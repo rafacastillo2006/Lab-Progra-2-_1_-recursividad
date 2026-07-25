@@ -1,4 +1,3 @@
-
 package labprogramacion2_1_recursividad;
 
 import java.awt.BorderLayout;
@@ -9,16 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-
-
-    
-    public class LabProgramacion2_1_Recursividad implements ActionListener {
+public class LabProgramacion2_1_Recursividad implements ActionListener {
 
     JFrame frame = new JFrame();
     JPanel panel_boton = new JPanel();
     JButton[] botones = new JButton[30];
+
+    JLabel nombre = new JLabel();
+    JTextField campo_nombre = new JTextField(20);
+    JPanel panel_superior = new JPanel();
 
     JPanel panel_inferior = new JPanel();
     JButton s_ticket = new JButton();
@@ -43,20 +45,20 @@ import javax.swing.JPanel;
         for (int i = 0; i < 30; i++) {
 
             botones[i] = new JButton();
+            String num= String.valueOf(i+1);
+            botones[i].setText(num);
             panel_boton.add(botones[i]);
             botones[i].addActionListener(this);
 
         }
 
-        
         s_ticket.setText("Sell Ticket");
         c_ticket.setText("Cancel Ticket");
         dispatch.setText("Dispatch");
         p_passenger.setText("Print Passengers");
         v_income.setText("View Income");
         s_passenger.setText("Search Passenger");
-        
-        
+
         panel_inferior.setLayout(new GridLayout(1, 6));
         panel_inferior.add(s_ticket);
         panel_inferior.add(c_ticket);
@@ -65,6 +67,13 @@ import javax.swing.JPanel;
         panel_inferior.add(v_income);
         panel_inferior.add(s_passenger);
 
+        
+        nombre.setText("Nombre de Pasajero");
+        panel_superior.add(nombre);
+        panel_superior.add(campo_nombre);
+        frame.add(panel_superior, BorderLayout.NORTH);
+        
+        
         frame.add(panel_boton);
         frame.add(panel_inferior);
         frame.add(panel_boton, BorderLayout.CENTER);
@@ -78,15 +87,10 @@ import javax.swing.JPanel;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
-
-    
-    
     public static void main(String[] args) {
         // TODO code application logic here
-       PalindromoAir LabProgramacion2_1_Recursividad = new PalindromoAir();
-   
+        LabProgramacion2_1_Recursividad app = new LabProgramacion2_1_Recursividad();
+
     }
-    
 
 }
