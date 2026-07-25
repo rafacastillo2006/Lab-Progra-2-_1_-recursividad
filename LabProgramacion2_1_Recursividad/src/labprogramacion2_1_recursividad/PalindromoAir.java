@@ -14,7 +14,7 @@ import java.awt.BorderLayout;
  *
  * @author aluk
  */
-public class MiVentana implements ActionListener {
+public class PalindromoAir implements ActionListener {
 
     JFrame frame = new JFrame();
     JPanel panel_boton = new JPanel();
@@ -23,12 +23,12 @@ public class MiVentana implements ActionListener {
     JPanel panel_inferior = new JPanel();
     JButton s_ticket = new JButton();
     JButton c_ticket = new JButton();
-    JButton dipatch = new JButton();
+    JButton dispatch = new JButton();
     JButton p_passenger = new JButton();
     JButton v_income = new JButton();
     JButton s_passenger = new JButton();
 
-    public MiVentana() {
+    public PalindromoAir() {
 
         frame.setTitle("MainApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,12 +50,17 @@ public class MiVentana implements ActionListener {
 
         
         s_ticket.setText("Sell Ticket");
+        c_ticket.setText("Cancel Ticket");
+        dispatch.setText("Dispatch");
+        p_passenger.setText("Print Passengers");
+        v_income.setText("View Income");
+        s_passenger.setText("Search Passenger");
         
         
         panel_inferior.setLayout(new GridLayout(1, 6));
         panel_inferior.add(s_ticket);
         panel_inferior.add(c_ticket);
-        panel_inferior.add(dipatch);
+        panel_inferior.add(dispatch);
         panel_inferior.add(p_passenger);
         panel_inferior.add(v_income);
         panel_inferior.add(s_passenger);
