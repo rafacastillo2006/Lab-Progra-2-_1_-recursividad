@@ -19,11 +19,14 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
     JFrame frame = new JFrame();
     JPanel panel_boton = new JPanel();
     JButton[] botones = new JButton[30];
-
+    
+    
+    JPanel panel_superior = new JPanel();
     JLabel nombre = new JLabel();
     JTextField campo_nombre = new JTextField(20);
-    JPanel panel_superior = new JPanel();
+    
 
+    
     JPanel panel_inferior = new JPanel();
     JButton s_ticket = new JButton();
     JButton c_ticket = new JButton();
@@ -32,7 +35,7 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
     JButton v_income = new JButton();
     JButton s_passenger = new JButton();
 
-    JTextArea consola = new JTextArea(10, 25);
+    JTextArea consola = new JTextArea(0, 20);
 
     public LabProgramacion2_1_Recursividad() {
 
