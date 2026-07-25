@@ -8,11 +8,10 @@ public class Ticket {
     double precioTicket;
     boolean esPalindromo;                
     
-    public Ticket(String nombre, double precioTicket, boolean esPalindromo) {
+    public Ticket(String nombre, double precioTicket) {
         this.nombre = nombre;
         this.precioTicket = precioTicket;
-        this.esPalindromo = esPalindromo;
-        this.montoPago = montoPago;
+        this.esPalindromo = palindromo.esPalindromo(nombre);
     
         if (this.esPalindromo) {
             this.montoPago = precioTicket * 0.80;
