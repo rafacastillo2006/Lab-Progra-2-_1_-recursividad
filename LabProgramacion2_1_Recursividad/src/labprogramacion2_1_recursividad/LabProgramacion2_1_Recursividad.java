@@ -45,7 +45,7 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         for (int i = 0; i < 30; i++) {
 
             botones[i] = new JButton();
-            String num= String.valueOf(i+1);
+            String num = String.valueOf(i + 1);
             botones[i].setText(num);
             panel_boton.add(botones[i]);
             botones[i].addActionListener(this);
@@ -59,6 +59,13 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         v_income.setText("View Income");
         s_passenger.setText("Search Passenger");
 
+        s_ticket.addActionListener(this);
+        c_ticket.addActionListener(this);
+        dispatch.addActionListener(this);
+        p_passenger.addActionListener(this);
+        v_income.addActionListener(this);
+        s_passenger.addActionListener(this);
+
         panel_inferior.setLayout(new GridLayout(1, 6));
         panel_inferior.add(s_ticket);
         panel_inferior.add(c_ticket);
@@ -67,15 +74,12 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         panel_inferior.add(v_income);
         panel_inferior.add(s_passenger);
 
-        
         nombre.setText("Nombre de Pasajero");
         panel_superior.add(nombre);
         panel_superior.add(campo_nombre);
         frame.add(panel_superior, BorderLayout.NORTH);
+
         
-        
-        frame.add(panel_boton);
-        frame.add(panel_inferior);
         frame.add(panel_boton, BorderLayout.CENTER);
         frame.add(panel_inferior, BorderLayout.SOUTH);
 
@@ -84,7 +88,42 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        for (int i = 0; i < botones.length; i++) {
+            if (e.getSource() == botones[i]) {
+
+                System.out.println("Print prueba asiento : " + i);
+
+                break;
+
+            }
+
+        }
+
+        if (e.getSource() == s_ticket) {
+            System.out.println("prueba vender ticket");
+        }
+
+        if (e.getSource() == c_ticket) {
+
+        }
+
+        if (e.getSource() == dispatch) {
+
+        }
+
+        if (e.getSource() == p_passenger) {
+
+        }
+
+        if (e.getSource() == v_income) {
+
+        }
+
+        if (e.getSource() == s_passenger) {
+
+        }
+
     }
 
     public static void main(String[] args) {
