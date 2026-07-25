@@ -1,81 +1,131 @@
 package labprogramacion2_1_recursividad;
 
-import java.awt.Color;
-import static java.awt.Color.BLACK;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+public class PalindromoAir {
 
-/**
- *
- * @author aluk
- */
-public class PalindromoAir implements ActionListener {
-
-    JFrame frame = new JFrame();
-    JPanel panel_boton = new JPanel();
-    JButton[] botones = new JButton[30];
-
-    JPanel panel_inferior = new JPanel();
-    JButton s_ticket = new JButton();
-    JButton c_ticket = new JButton();
-    JButton dispatch = new JButton();
-    JButton p_passenger = new JButton();
-    JButton v_income = new JButton();
-    JButton s_passenger = new JButton();
+    private Ticket[] asientos;
+    private static final double precioTicket = 100.0;
 
     public PalindromoAir() {
+        this.asientos = new Ticket[30];
+    }
 
-        frame.setTitle("MainApp");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setSize(1600, 900);
-        frame.getContentPane().setBackground(new Color(39, 34, 40));
-        frame.setLocationRelativeTo(null);
+    // --- MÉTODOS RECURSIVOS ---
 
-        panel_boton.setLayout(new GridLayout(5, 6));
-        panel_boton.setBackground(BLACK);
+    // 1. Busca el primer asiento disponible a partir de 'index'
+    public int firstAvailable(int index) {
+        if (index >= asientos.length) {
+            return -1; // Avión lleno
+        }
+        if (asientos[index] == null) {
+            return index; // Encontró asiento libre
+        }
+        return firstAvailable(index + 1);
+    }
 
-        for (int i = 0; i < 30; i++) {
+    // 2. Busca a un pasajero por su nombre recursivamente
+    public int searchPassenger(String name, int index) {
+        if (index >= asientos.length) {
+            return -1; // No encontrado
+        }
+        if (asientos[index] != null && asientos[index].getName().equalsIgnoreCase(name)) {
+            return index; // Encontrado en esta posición
+        }
+        return searchPassenger(name, index + 1);
+    }
 
-            botones[i] = new JButton();
-            panel_boton.add(botones[i]);
-            botones[i].addActionListener(this);
+    // 3. Determina recursivamente si una cadena es un palíndromo
+    public boolean isPalindromo(String name) {
+        String clean = name.replaceAll("\\s+", "").toLowerCase();
+        return checkPalindromeRecursive(clean, 0, clean.length() - 1);
+    }
 
+    private boolean checkPalindromeRecursive(String str, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+        return checkPalindromeRecursive(str, start + 1, end - 1);
+    }
+
+    // 4. Retorna el texto acumulado de todos los pasajeros vigentes
+    public String printPassengers(int index) {
+        if (index >= asientos.length) {
+            return "";
+        }
+        String actual = "";
+        if (asientos[index] != null) {
+            actual = "Asiento #" + (index + 1) + " -> " + asientos[index].print() + "\n";
+        }
+        return actual + printPassengers(index + 1);
+    }
+
+    // 5. Calcula la suma total de ingresos recursivamente
+    public double income(int index) {
+        if (index >= asientos.length) {
+            return 0.0;
+        }
+        double montoActual = (asientos[index] != null) ? asientos[index].getFinalAmount() : 0.0;
+        return montoActual + income(index + 1);
+    }
+
+    // 6. Resetea todos los asientos poníendolos en null recursivamente
+    public void reset(int index) {
+        if (index >= asientos.length) {
+            return;
+        }
+        asientos[index] = null;
+        reset(index + 1);
+    }
+
+    // --- REGLAS DE NEGOCIO Y OPERACIONES ---
+
+    public String sellTicket(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return "Error: Debe ingresar un nombre válido.";
         }
 
-        
-        s_ticket.setText("Sell Ticket");
-        c_ticket.setText("Cancel Ticket");
-        dispatch.setText("Dispatch");
-        p_passenger.setText("Print Passengers");
-        v_income.setText("View Income");
-        s_passenger.setText("Search Passenger");
-        
-        
-        panel_inferior.setLayout(new GridLayout(1, 6));
-        panel_inferior.add(s_ticket);
-        panel_inferior.add(c_ticket);
-        panel_inferior.add(dispatch);
-        panel_inferior.add(p_passenger);
-        panel_inferior.add(v_income);
-        panel_inferior.add(s_passenger);
+        if (searchPassenger(name, 0) != -1) {
+            return "Error: El pasajero '" + name + "' ya posee un boleto.";
+        }
 
-        frame.add(panel_boton);
-        frame.add(panel_inferior);
-        frame.add(panel_boton, BorderLayout.CENTER);
-        frame.add(panel_inferior, BorderLayout.SOUTH);
+        int indexLibre = firstAvailable(0);
+        if (indexLibre == -1) {
+            return "¡Error! No se puede vender el ticket: El avión está lleno.";
+        }
 
-        frame.setVisible(true);
+        boolean esPal = isPalindromo(name);
+        Ticket nuevoTicket = new Ticket(name, PRECIO_TICKET, esPal);
+        asientos[indexLibre] = nuevoTicket;
+
+        String mensaje = "Ticket vendido con éxito en Asiento #" + (indexLibre + 1) + ".\n"
+                + "Monto a pagar: $" + nuevoTicket.getFinalAmount();
+
+        if (esPal) {
+            mensaje += " (¡Aplica 20% de descuento por nombre Palíndromo!)";
+        }
+
+        return mensaje;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean cancelTicket(String name) {
+        int index = searchPassenger(name, 0);
+        if (index != -1) {
+            asientos[index] = null; // Libera el asiento
+            return true;
+        }
+        return false;
     }
 
+    public double dispatch() {
+        double totalIngresos = income(0);
+        reset(0); // Reinicia los asientos a estado original (vacío)
+        return totalIngresos;
+    }
+
+    // Getter útil para que MainApp consulte el arreglo y pinte los botones
+    public Ticket[] getAsientos() {
+        return asientos;
+    }
 }
