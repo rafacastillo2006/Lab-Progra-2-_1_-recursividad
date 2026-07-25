@@ -78,11 +78,7 @@ public class PalindromoAir {
         asientos[indice] = null;
     }
     
-    public double dispatch() {
-        double totaldeIngresos = income(0);
-        reset(0);
-        return totaldeIngresos;
-    }
+    
     
     public String sellTicket(String nombre){
         int asiento = firstAvailable(0);
@@ -97,5 +93,9 @@ public class PalindromoAir {
         return "Ticket vendido.\n" + "Asiento: " + (asiento + 1) + "\n Monto pagado: L." + asientos[asiento].getFinalAmount();
     }
         
-        
+        public double dispatch() {
+        double totaldeIngresos = income(0);
+        reset(0);
+        return totaldeIngresos;
+    }
     }
