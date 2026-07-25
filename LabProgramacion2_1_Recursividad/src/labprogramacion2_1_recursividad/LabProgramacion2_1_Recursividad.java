@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class LabProgramacion2_1_Recursividad implements ActionListener {
 
@@ -30,17 +32,16 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
     JButton v_income = new JButton();
     JButton s_passenger = new JButton();
 
+    JTextArea consola = new JTextArea(10, 25);
+
     public LabProgramacion2_1_Recursividad() {
 
         frame.setTitle("MainApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(1600, 900);
-        frame.getContentPane().setBackground(new Color(39, 34, 40));
         frame.setLocationRelativeTo(null);
-
         panel_boton.setLayout(new GridLayout(5, 6));
-        panel_boton.setBackground(BLACK);
 
         for (int i = 0; i < 30; i++) {
 
@@ -79,6 +80,8 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         panel_superior.add(campo_nombre);
         frame.add(panel_superior, BorderLayout.NORTH);
 
+       
+        frame.add(new JScrollPane(consola), BorderLayout.EAST);
         
         frame.add(panel_boton, BorderLayout.CENTER);
         frame.add(panel_inferior, BorderLayout.SOUTH);
@@ -92,7 +95,7 @@ public class LabProgramacion2_1_Recursividad implements ActionListener {
         for (int i = 0; i < botones.length; i++) {
             if (e.getSource() == botones[i]) {
 
-                System.out.println("Print prueba asiento : " + i);
+                consola.append("Print prueba asiento : " + i+"\n");
 
                 break;
 
